@@ -1,0 +1,13 @@
+SSH-Matic 0.1.1 alpha
+
+This script is meant to automate the repetitive tasks of connecting to some remote SSH
+hosts and invoking some commands as simple as possible.
+
+The only thing you need to do is to customize list of servers to provide their IP numbers
+and usernames, plus to give the absolute path to your private (not password-protected)
+SSH key. Path can be also realtive to the directory from which the script will be invoked.
+
+Default command in version 0.1.1 is to make 'git pull' on the 'public_html' subdirectory.
+You may wish to change it.
+
+To see more, go to https://github.com/tadeck/ssh-matic

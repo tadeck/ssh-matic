@@ -1,0 +1,3 @@
+[submodule "paramiko"]
+	path = paramiko
+	url = https://github.com/robey/paramiko.git
