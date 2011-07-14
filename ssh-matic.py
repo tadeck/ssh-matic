@@ -41,7 +41,7 @@ for environment in environments:
     # Determining variables for current environment:
     curr = {}
     for option_name in ['name','host','username','private_key','command','indent']:
-	curr[option_name] = environment.get(option_name, defaults.get(option_name))
+        curr[option_name] = environment.get(option_name, defaults.get(option_name))
     
     print '[Connecting to ' + bold(curr['name']) + ']'
     print
