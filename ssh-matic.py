@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
 '''
-SSH-Matic 0.1.1 alpha
+SSH-Matic 0.1.2 alpha
 
 Simple update script aimed connecting with SSH to each server on the list and
-invoking 'git pull' in public_html subdirectory, then displaying results.
+invoking specific command, then displaying results. Originally created to make
+pulls from Git repositories, extended to support more usage scenarios.
 Needs some polishing.
 Author: https://github.com/tadeck/
 
 HOW TO USE IT
-To use it, replace given server with your owns and update the path to private key.
-Feel free to fork it on https://github.com/tadeck/ssh-matic and make pull request
+To use it, just provide appropriate settings in settings.dat file. If some setting
+will not be found for specific environment, default will be used for that setting.
+Feel free to fork it on https://github.com/tadeck/ssh-matic and make pull requests
 
 READ MORE
 More details, updated version, howto and bug tracker accessible on:
