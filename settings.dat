@@ -1,0 +1,23 @@
+{
+    # Set different options for specific environment to overwrite defaults
+    'environments': [
+	{
+	    'name': 'Server1',
+	    'host': '127.0.0.1', # some IP or domain here
+	    'username': 'user1' # username on the server no. 1
+	},
+	{
+	    'name': 'Server2',
+	    'host': 'example.com', # some IP or domain here
+	    'username': 'user2' # username on the server no. 2
+	}
+    ],
+
+    # Default settings used when no environment-specific setting has been found
+    'defaults': {
+	'name': 'some server',
+	'indent': '    ', # indent from remote messages
+	'private_key': '/home/user/.ssh/id_rsa', # location of private key
+	'command': 'ls'
+    }
+}

@@ -17,24 +17,14 @@ More details, updated version, howto and bug tracker accessible on:
 https://github.com/tadeck/ssh-matic
 '''
 
-environments = [
-    {
-        'name': 'Server1',
-        'host': '123.123.123.123', # some IP or domain here
-        'username': 'user' # username on the server no. 1
-    },
-    {
-        'name': 'Server2',
-        'host': '234.234.234.234', # some IP or domain here
-        'username': 'master' # username on the server no. 2
-    }
-]
+# location of this script
+import sys
+current_dir = sys.path[0]
 
-options = {
-    'indent': '    ', # indent from remote messages
-    'private_key': '/home/myself/.ssh/id_rsa', # location of private key
-    'command': 'git --git-dir=public_html/.git pull'
-}
+data = eval(open(current_dir+'/settings.dat', 'r').read())
+
+environments = data.get('environments')
+defaults = data.get('defaults')
 
 # some helpers used only for displaing colored output in Linux console
 def success(text):
@@ -48,21 +38,27 @@ def bold(text):
 
 import ssh
 for environment in environments:
-    print '[Updating ' + bold(environment['name']) + ']'
+    # Determining variables for current environment:
+    curr = {}
+    for option_name in ['name','host','username','private_key','command','indent']:
+	curr[option_name] = environment.get(option_name, defaults.get(option_name))
+    
+    print '[Connecting to ' + bold(curr['name']) + ']'
     print
-    server = ssh.Connection(host=environment['host'], username=environment['username'], private_key=options['private_key'])
-    result = server.execute(options['command'])
+    
+    server = ssh.Connection(host=curr['host'], username=curr['username'], private_key=curr['private_key'])
+    result = server.execute(curr['command'])
 
     # Cleanup lines
     result = [line.strip(' \n\t') for line in result]
 
     # Display results
     if result.count('Already up-to-date.') > 0 and len(result) == 1:
-        print options['indent'] + success('(up-to-date)')
+        print curr['indent'] + success('(up-to-date)')
         print
     else:
         for line in result:
-            print options['indent'] + warning(line)
+            print curr['indent'] + warning(line)
         print
 
     server.close()
